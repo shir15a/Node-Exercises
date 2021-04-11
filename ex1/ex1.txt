@@ -1,0 +1,3 @@
+// Js:                                             node JS
+// - run only in browswrs                          can run outside the browswr
+// - client side                                   server side
