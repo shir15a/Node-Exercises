@@ -1,3 +1,8 @@
 // Js:                                             node JS
 // - run only in browswrs                          can run outside the browswr
+
 // - client side                                   server side
+
+// - It is the upgraded version of ECMA            Node is writen is written in C, C++ and JavaScript
+// script that uses Chrome’s V8 engine
+//written in C++. 
