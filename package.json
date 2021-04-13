@@ -1,0 +1,24 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node './Example/index.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shir15a/Node-Exercises.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shir15a/Node-Exercises/issues"
+  },
+  "homepage": "https://github.com/shir15a/Node-Exercises#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
