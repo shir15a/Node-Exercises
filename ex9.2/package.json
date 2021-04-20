@@ -1,0 +1,15 @@
+{
+  "name": "ex9.2",
+  "version": "1.0.0",
+  "main": "9.2.js",
+  "scripts": {
+    "start": "nodemon ./9.2.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

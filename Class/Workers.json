@@ -1,0 +1,6 @@
+{ 
+    "workers": [
+        { "name": "Shir", "id": "205642333", "isActive": "false" },
+        { "name": "Saar", "id": "209876577", "isActive": "false" }
+    ]
+}

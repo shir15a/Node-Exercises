@@ -1,0 +1,14 @@
+{
+    "rooms": [
+        {
+            "roomNumber": "1",
+            "amount": "2",
+            "isActive": "false"
+        },
+        {
+            "roomNumber": "2",
+            "amount": "5",
+            "isActive": "false"
+        }
+    ]
+}
