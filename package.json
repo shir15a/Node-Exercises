@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ex19.1/app.js"
+    "start": "nodemon ex18.1/app.js"
   },
   "repository": {
     "type": "git",
