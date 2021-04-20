@@ -5,22 +5,14 @@ const createProduct = (req, res) => {
         name,
         category,
         isActive,
-        description,
-        price,
-        images,
-        phone,
+        details
     } = req.body;
 
     const product = new productModel({
         name,
         category,
         isActive,
-        details: {
-            description,
-            price,
-            images,
-            phone,
-        },
+        details,
     });
 
     product.save((err) => {
