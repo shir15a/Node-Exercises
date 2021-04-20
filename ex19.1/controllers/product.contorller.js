@@ -27,13 +27,6 @@ const createProduct = (req, res) => {
         if (err) return res.json({ error: err });
         return res.json({ success: product });
       });
-
-    // product.save().then(() => {
-    //     console.log(success)
-    // }).catch((error) => {
-    //     console.log('Error!', error)
-    // })
-
 };
 
 const getProducts = (req, res) => {
@@ -56,9 +49,18 @@ const getAllActive = (req, res) => {
     });
 };
 
+const specificPriceRange = (req, res) => {
+    const { min, max } = req.body;
+    productModel.find({"details.price" : {$gte:min, $lte: max}}).then((products) => {
+        return res.send(products);
+    });
+};
+
+
 module.exports = {
     create: createProduct,
     getAll: getProducts,
     getById : getProductsById,
-    allActive: getAllActive
+    allActive: getAllActive,
+    specificPriceRange : specificPriceRange
 };
