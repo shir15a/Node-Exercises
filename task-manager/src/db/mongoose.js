@@ -82,7 +82,7 @@ const product = new Product({
             "https://www.idigital.co.il/files/iphone12/iphone12/iPhone_12_Lineup_Screen__WWEN.jpg",
             "https://www.idigital.co.il/files/iphone12/iphone12pro-max/iPhone_12_Pro_Max_Lineup_Screen__WWEN.jpg",
         ],
-        phone: "054000",
+        phone: "0547213432",
     },
 });
 
