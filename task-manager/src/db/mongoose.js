@@ -21,54 +21,56 @@ const Product = mongoose.model('Product', {
     },
     details: {
         type: {
-        description: {
-            type: String,
-            required: true,
-            validate(value) {
-                if (value.length < 10) {
-                    throw new Error('at least 10 letters.')
+            description: {
+                type: String,
+                required: true,
+                validate(value) {
+                    if (value.length < 10) {
+                        throw new Error('at least 10 letters.')
+                    }
                 }
-            }
-        },
-        price: {
-            type: Number,
-            required: true,
-            validate(value) {
-                if (value < 0) {
-                    throw new Error('not a positive number')
+            },
+            price: {
+                type: Number,
+                required: true,
+                validate(value) {
+                    if (value < 0) {
+                        throw new Error('not a positive number')
+                    }
                 }
-            }
-        },
-        discount: {
-            type: Number,
-            required: false,
-            default: 0
-        },
-        images: {
-            type: Array,
-            required: false,
-            validate(value) {
-                if (value.length < 2) {
-                    throw new Error(' at least two images')
+            },
+            discount: {
+                type: Number,
+                required: false,
+                default: 0
+            },
+            images: {
+                type: Array,
+                required: false,
+                validate(value) {
+                    if (value.length < 2) {
+                        throw new Error(' at least two images')
+                    }
                 }
-            }
-        },
-        phone: {
-            type: String,
-            required: true,
-            validate(value) {
-                if (!validator.isMobilePhone(value)) {
-                    throw new Error('Phone is invalid')
+            },
+            phone: {
+                type: String,
+                minLength: 10,
+                required: true,
+                validate(value) {
+                    if (!value.startsWith("05")) {
+                        throw new Error("not an israeli Number");
+                    }
                 }
-            }
-        },
-        date: {
-            type: Date,
-            required: false,
-            unique: false,
-            default: Date.now(),
-        },
-    }}
+            },
+            date: {
+                type: Date,
+                required: false,
+                unique: false,
+                default: Date.now(),
+            },
+        }
+    }
 })
 
 const product = new Product({
@@ -82,7 +84,7 @@ const product = new Product({
             "https://www.idigital.co.il/files/iphone12/iphone12/iPhone_12_Lineup_Screen__WWEN.jpg",
             "https://www.idigital.co.il/files/iphone12/iphone12pro-max/iPhone_12_Pro_Max_Lineup_Screen__WWEN.jpg",
         ],
-        phone: "054-0000000",
+        phone: "0540000000",
     },
 });
 
