@@ -18,45 +18,57 @@ const createProduct = (req, res) => {
     product.save((err) => {
         if (err) return res.status(400).json({ error: err });
         return res.status(201).json({ success: product });
-      });
+    });
 };
 
-const getProducts = (req, res) => {
-    productModel.find({}).then((products) => {
+const getProducts = async (req, res) => {
+    try {
+        const products = await productModel.find({})
         return res.send(products);
-    }).catch((error)=> res.status(500).json({error}));
+    }
+    catch (error) {
+        res.status(500).json({ error })
+    }
 };
 
 
-const getProductsById = async(req, res) => {
+const getProductsById = async (req, res) => {
     const { id } = req.params;
     try {
         let product = await productModel.findOne({ "_id": id })
         return res.status(200).send(product)
     }
-    catch (error ) {
-        return res.status(404).send(error )
+    catch (error) {
+        return res.status(404).send(error)
     }
 };
 
-const getAllActive = (req, res) => {
-    productModel.find({isActive : true}).then((products) => {
-        return res.send(products);
-    }).catch((error)=> res.status(500).json({error}));
+const getAllActive = async (req, res) => {
+    try {
+        const allActive = productModel.find({ isActive: true })
+        return res.send(allActive);
+    }
+    catch (error) {
+        return res.status(500).json({ error })
+    }
 };
 
-const specificPriceRange = (req, res) => {
+const specificPriceRange = async (req, res) => {
     const { min, max } = req.body;
-    productModel.find({"details.price" : {$gte:min, $lte: max}}).then((products) => {
-        return res.send(products);
-    }).catch((error)=> res.status(500).json({error}));
+    try {
+        const products = await productModel.find({ "details.price": { $gte: min, $lte: max } });
+        return res.send(products)
+    }
+    catch (error) {
+        return res.status(500).json({ error })
+    }
 };
 
 
 module.exports = {
     create: createProduct,
     getAll: getProducts,
-    getById : getProductsById,
+    getById: getProductsById,
     allActive: getAllActive,
-    specificPriceRange : specificPriceRange
+    specificPriceRange: specificPriceRange
 };
