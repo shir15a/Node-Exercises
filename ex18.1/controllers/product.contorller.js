@@ -46,7 +46,7 @@ const getProductsById = async (req, res) => {
 const getAllActive = async (req, res) => {
     try {
         const allActive = productModel.find({ isActive: true })
-        return res.send(allActive);
+        return res.status(200).send(allActive);
     }
     catch (error) {
         return res.status(500).json({ error })
@@ -65,10 +65,53 @@ const specificPriceRange = async (req, res) => {
 };
 
 
+const updateActiveAndDiscount = async (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ["isActive", "details.discount"];
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invalid updates !' })
+    }
+    try {
+        const product = await productModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        if (!product) {
+            return res.status(404).send()
+        }
+        res.send(product)
+    }
+    catch (error) {
+        res.status(400).json(error)
+    }
+};
+
+const deleteById = async (req, res) => {
+    try {
+        const product = await productModel.findByIdAndDelete(req.params.id);
+        if (!product) return res.status(404).json.send();
+        res.send(product)
+    }
+    catch (error) {
+        return res.status(500).json(error)
+    }
+};
+
+const deleteAllProducts = async (req, res) => {
+    try {
+        const data = await productModel.deleteMany();
+        res.send(data);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
+
+
 module.exports = {
     create: createProduct,
     getAll: getProducts,
     getById: getProductsById,
     allActive: getAllActive,
-    specificPriceRange: specificPriceRange
+    specificPriceRange: specificPriceRange,
+    updateActive: updateActiveAndDiscount,
+    deleteById: deleteById,
+    deleteAll : deleteAllProducts
 };
