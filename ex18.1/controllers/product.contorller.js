@@ -1,4 +1,4 @@
-const productModel = require("./../models/product.model");
+const productModel = require("../models/product.model");
 
 const createProduct = (req, res) => {
     const {
@@ -16,36 +16,40 @@ const createProduct = (req, res) => {
     });
 
     product.save((err) => {
-        if (err) return res.json({ error: err });
-        return res.json({ success: product });
+        if (err) return res.status(400).json({ error: err });
+        return res.status(201).json({ success: product });
       });
 };
 
 const getProducts = (req, res) => {
     productModel.find({}).then((products) => {
         return res.send(products);
-    });
+    }).catch((error)=> res.status(500).json({error}));
 };
 
 
-const getProductsById = (req, res) => {
+const getProductsById = async(req, res) => {
     const { id } = req.params;
-    productModel.find({"_id" : id}).then((product) => {
-        return res.send(product);
-    });
+    try {
+        let product = await productModel.findOne({ "_id": id })
+        return res.status(200).send(product)
+    }
+    catch (error ) {
+        return res.status(404).send(error )
+    }
 };
 
 const getAllActive = (req, res) => {
     productModel.find({isActive : true}).then((products) => {
         return res.send(products);
-    });
+    }).catch((error)=> res.status(500).json({error}));
 };
 
 const specificPriceRange = (req, res) => {
     const { min, max } = req.body;
     productModel.find({"details.price" : {$gte:min, $lte: max}}).then((products) => {
         return res.send(products);
-    });
+    }).catch((error)=> res.status(500).json({error}));
 };
 
 
